@@ -41,7 +41,7 @@ describe('Character', function()    {
         it('should be able to attack an enemy', function () {
             let x = new Battle();
             let initHP = x.enemy.health;
-            x.character.attack(x);
+            x.character.attack(x.enemy);
             expect(x.enemy.health < initHP)
         })
     });
@@ -52,7 +52,7 @@ describe('Enemy', function()    {
         it('should be able to attack a player', function()  {
             let x = new Battle;
             let initHP = x.character.health;
-            x.enemy.attack(x);
+            x.enemy.attack(x.character);
             expect(x.enemy.health < initHP)
         })
     });
