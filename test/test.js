@@ -46,3 +46,14 @@ describe('Character', function()    {
         })
     });
 });
+
+describe('Enemy', function()    {
+    describe('testing the methods of it', function()    {
+        it('should be able to attack a player', function()  {
+            let x = new Battle;
+            let initHP = x.character.health;
+            x.enemy.attack(x);
+            expect(x.enemy.health < initHP)
+        })
+    });
+});
