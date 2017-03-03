@@ -42,8 +42,25 @@ describe('Character', function()    {
             let x = new Battle();
             let initHP = x.enemy.health;
             x.character.attack(x.enemy);
-            expect(x.enemy.health < initHP)
-        })
+            expect(x.enemy.health < initHP);
+        });
+        it('should be able to cast fire', function()    {
+            let x = new Battle();
+            let initHP = x.enemy.health;
+            let initMana = x.character.mana;
+            x.character.castFire(x.enemy);
+            expect(x.enemy.health < initHP && x.character.mana < initMana);
+        });
+        it('should not be able to cast fire if it does not have enough mana', function()    {
+            let x = new Battle();
+            let initHP = x.enemy.health;
+            let initMana = x.character.mana;
+            initMana = 4;
+            x.character.castFire(x.enemy);
+            if (initMana < 6)   {
+                expect(initHP === initHP);
+            }
+        });
     });
 });
 
@@ -54,6 +71,6 @@ describe('Enemy', function()    {
             let initHP = x.character.health;
             x.enemy.attack(x.character);
             expect(x.enemy.health < initHP)
-        })
+        });
     });
 });

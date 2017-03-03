@@ -3,9 +3,9 @@ class Enemy {
         this.health = 100;
     }
     attack(character)   {
-        var enemeyHP = character.health;
-        enemeyHP -= Math.floor(Math.random() * 15);
-        return enemeyHP;
+        var enemyHP = character.health;
+        enemyHP -= Math.floor(Math.random() * 15);
+        return enemyHP;
     }
 }
 
