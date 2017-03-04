@@ -32,6 +32,13 @@ describe('Battle', function() {
             x.fight();
             expect(x.playerDmg != undefined && x.enemyDmg != undefined);
         });
+        it('should end the battle when someone dies', function()  {
+            let x = new Battle(new Character, new Enemy);
+            for (var i = 0; i < 40; i++)    {
+                x.fight();
+            }
+            expect(x.finished);
+        })
     });
 });
 

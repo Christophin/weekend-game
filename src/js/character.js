@@ -4,13 +4,13 @@ class Character {
         this.mana = 30;
     }
     attack(enemy)   {
-        var attackDmg = Math.floor((Math.random()+ 1) * 15);
+        var attackDmg = Math.floor((Math.random()) * 15);
         enemy.health -= attackDmg;
         return attackDmg;
     }
     castFire(enemy) {
         if (this.mana >= 6) {
-            var attackDmg = Math.floor(((Math.random() + 1) * 2) * 15);
+            var attackDmg = Math.floor(((Math.random()) * 2) * 15);
             enemy.health -= attackDmg;
             this.mana -= 6;
             return attackDmg;

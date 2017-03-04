@@ -20,6 +20,16 @@ class Battle {
         this.enemyDmg = this.enemy.attack(this.character);
         this.updateBattle();
     }
+    checkWinner () {
+        if (this.enemy.health <= 0)  {
+            return `Congratulations, you WON!!!!`
+        }
+        if (this.character.health <= 0)  {
+            return `You obviously don't have
+            enough skill to beat this game, which
+            certainly isn't decided by random numbers.`;
+        }
+    }
 
 }
 
