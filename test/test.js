@@ -38,7 +38,20 @@ describe('Battle', function() {
                 x.fight();
             }
             expect(x.finished);
-        })
+        });
+        it('should determine a winner', function()  {
+            let x = new Battle(new Character, new Enemy);
+            for (var i = 0; i < 40; i++)    {
+                x.fight();
+            }
+            expect(
+                x.checkWinner() === `Congratulations, you WON!!!!`
+                ||
+                x.checkWinner() === `You obviously don't have
+                enough skill to beat this game, which
+                certainly isn't decided by random numbers.`
+            );
+        });
     });
 });
 
