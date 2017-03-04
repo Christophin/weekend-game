@@ -14,64 +14,69 @@ const assert = chai.assert;
 describe('Battle', function() {
     describe('Testing the creation of it', function()   {
         it('should exist after we create it', function()    {
-            let x = new Battle(new Character, new Enemy);
+            let x = new Battle(new Character(1), new Enemy(1));
             expect(x).to.be.an.instanceOf(Battle);
         });
         it('should take a Character', function()   {
-            let x = new Battle(new Character, new Enemy);
+            let x = new Battle(new Character(1), new Enemy(1));
             expect(x.character).to.be.an.instanceOf(Character);
         });
         it('should take an Enemy', function()   {
-            let x = new Battle(new Character, new Enemy);
+            let x = new Battle(new Character(1), new Enemy(1));
             expect(x.enemy).to.be.an.instanceOf(Enemy);
         });
     });
     describe('Testing the methods of it', function()    {
         it('should control a fight', function ()    {
-            let x = new Battle(new Character, new Enemy);
+            let x = new Battle(new Character(1), new Enemy(1));
             x.fight();
             expect(x.playerDmg != undefined && x.enemyDmg != undefined);
         });
         it('should end the battle when someone dies', function()  {
-            let x = new Battle(new Character, new Enemy);
+            let x = new Battle(new Character(1), new Enemy(1));
             for (var i = 0; i < 40; i++)    {
                 x.fight();
             }
             expect(x.finished);
         });
         it('should determine a winner', function()  {
-            let x = new Battle(new Character, new Enemy);
-            for (var i = 0; i < 40; i++)    {
-                x.fight();
-            }
-            expect(
-                x.checkWinner() === `Congratulations, you WON!!!!`
-                ||
-                x.checkWinner() === `You obviously don't have
-                enough skill to beat this game, which
-                certainly isn't decided by random numbers.`
-            );
+            let x = new Battle(new Character(100), new Enemy(1));
+            x.fight();
+            expect(x.checkWinner() === `Congratulations, you WON!!!!`);
         });
+        it('should make the higher level character win (win test 2)', function() {
+            let x = new Battle(new Character(1), new Enemy(100));
+            x.fight();
+            expect(x.checkWinner() === `You obviously don't have
+            enough skill to beat this game, which
+            certainly isn't decided by random numbers.`);
+        })
     });
 });
 
 describe('Character', function()    {
+    describe('testing the levels of it', function()   {
+        it('have levels make the character stronger', function()    {
+            let x = new Battle(new Character(1), new Enemy(1));
+            expect(x.character.health === 100 && x.enemy.health === 100)
+        })
+    });
     describe('testing the methods of it', function()    {
         it('should be able to attack an enemy', function () {
-            let x = new Battle(new Character, new Enemy);
+            let x = new Battle(new Character(1), new Enemy(1));
             let initHP = x.enemy.health;
             x.character.attack(x.enemy);
             expect(x.enemy.health < initHP);
         });
         it('should be able to cast fire', function()    {
-            let x = new Battle(new Character, new Enemy);
+            let x = new Battle(new Character(1), new Enemy(1));
             let initHP = x.enemy.health;
             let initMana = x.character.mana;
             x.character.castFire(x.enemy);
             expect(x.enemy.health < initHP && x.character.mana < initMana);
         });
         it('should not be able to cast fire if it does not have enough mana', function()    {
-            let x = new Battle(new Character, new Enemy);
+            let x = new Battle(new Character(1), new Enemy(1));
             let initHP = x.enemy.health;
             x.character.mana = 4;
             x.character.castFire(x.enemy);

@@ -1,10 +1,11 @@
 class Character {
-    constructor()   {
-        this.health = 100;
+    constructor(level)   {
+        this.health = 100 * level;
         this.mana = 30;
+        this.level = level;
     }
     attack(enemy)   {
-        var attackDmg = Math.floor((Math.random()) * 15);
+        var attackDmg = Math.floor((Math.random()) * 15) * this.level;
         enemy.health -= attackDmg;
         return attackDmg;
     }

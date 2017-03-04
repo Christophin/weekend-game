@@ -22,7 +22,7 @@ class Battle {
     }
     checkWinner () {
         if (this.enemy.health <= 0)  {
-            return `Congratulations, you WON!!!!`
+            return `Congratulations, you WON!!!!`;
         }
         if (this.character.health <= 0)  {
             return `You obviously don't have
