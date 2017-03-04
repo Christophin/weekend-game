@@ -4,16 +4,16 @@ class Character {
         this.mana = 30;
     }
     attack(enemy)   {
-        var enemyHP = enemy.health;
-        enemyHP -= Math.floor((Math.random()+1) * 15);
-        return enemyHP;
+        var attackDmg = Math.floor((Math.random()+ 1) * 15);
+        enemy.health -= attackDmg;
+        return attackDmg;
     }
     castFire(enemy) {
-        var enemyHP = enemy.health;
         if (this.mana >= 6) {
-            enemyHP -= Math.floor(((Math.random() + 1) * 2) * 15);
+            var attackDmg = Math.floor(((Math.random() + 1) * 2) * 15);
+            enemy.health -= attackDmg;
             this.mana -= 6;
-            return enemyHP
+            return attackDmg;
         } else {
             return 'not enough mana to cast this spell';
         }
