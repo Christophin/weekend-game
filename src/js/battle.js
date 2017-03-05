@@ -11,14 +11,22 @@ class Battle {
             this.finished = true;
         }
     }
-    fight()   {
+    fight(type)   {
         if (this.finished)  {
             return;
         }
-        this.playerDmg = this.character.attack(this.enemy);
-        this.updateBattle();
-        this.enemyDmg = this.enemy.attack(this.character);
-        this.updateBattle();
+        if (type === 'attack')    {
+            this.playerDmg = this.character.attack(this.enemy);
+            this.updateBattle();
+            this.enemyDmg = this.enemy.attack(this.character);
+            this.updateBattle();
+        }
+        if (type === 'magic') {
+            this.playerDmg = this.character.castFire(this.enemy);
+            this.updateBattle();
+            this.enemyDmg = this.enemy.attack(this.character);
+            this.updateBattle();
+        }
     }
     checkWinner () {
         if (this.enemy.health <= 0)  {

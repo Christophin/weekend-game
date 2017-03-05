@@ -6,6 +6,7 @@ import { Battle } from '../src/js/battle';
 import { Character } from '../src/js/character';
 import { Enemy } from '../src/js/enemy';
 
+
 // Set Chai Constants
 const expect = chai.expect;
 const should = chai.should();
@@ -40,12 +41,12 @@ describe('Battle', function() {
             expect(x.finished);
         });
         it('should determine a winner', function()  {
-            let x = new Battle(new Character(100), new Enemy(1));
+            let x = new Battle(new Character(200), new Enemy(1));
             x.fight();
             expect(x.checkWinner() === `Congratulations, you WON!!!!`);
         });
         it('should make the higher level character win (win test 2)', function() {
-            let x = new Battle(new Character(1), new Enemy(100));
+            let x = new Battle(new Character(1), new Enemy(200));
             x.fight();
             expect(x.checkWinner() === `You obviously don't have
             enough skill to beat this game, which
@@ -56,10 +57,14 @@ describe('Battle', function() {
 
 describe('Character', function()    {
     describe('testing the levels of it', function()   {
-        it('have levels make the character stronger', function()    {
+        it('should have levels', function()    {
             let x = new Battle(new Character(1), new Enemy(1));
-            expect(x.character.health === 100 && x.enemy.health === 100)
-        })
+            expect(x.character.health === 100)
+        });
+        it('should increase its health for each level', function()  {
+            let x = new Battle(new Character(5), new Enemy(1));
+            expect(x.character.health === 500)
+        });
     });
     describe('testing the methods of it', function()    {
         it('should be able to attack an enemy', function () {
@@ -86,6 +91,16 @@ describe('Character', function()    {
 });
 
 describe('Enemy', function()    {
+    describe('testing the levels of it', function()   {
+        it('should have levels', function()    {
+            let x = new Battle(new Character(1), new Enemy(1));
+            expect(x.enemy.health === 100)
+        });
+        it('should increase its health for each level', function()  {
+            let x = new Battle(new Character(5), new Enemy(7));
+            expect(x.enemy.health === 700)
+        });
+    });
     describe('testing the methods of it', function()    {
         it('should be able to attack a player', function()  {
             let x = new Battle(new Character, new Enemy);
