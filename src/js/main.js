@@ -14,36 +14,39 @@ function startingStats()    {
 
 startingStats();
 
-$('.attack').click((event) =>  {
-    event.preventDefault;
+var wins = 0;
+
+$('.attack').click(() =>  {
     if (game.finished === false)  {
         game.fight('attack');
         updateMessage();
         $('.message-box').append(game.checkWinner());
         if (game.enemy.health <= 0) {
-            $('.button-box').append('<button class="nextStage">Continue On!</button>');
-            stageStepper();
+            nextStage();
         }
     }
 });
 
-$('.magic').click((event) =>  {
-    event.preventDefault;
+$('.magic').click(() =>  {
     if (game.finished === false)    {
         game.fight('magic');
         updateMessage();
         $('.message-box').append(game.checkWinner());
         if (game.enemy.health <= 0) {
-            $('.button-box').append('<button class="nextStage">Continue On!</button>');
-            stageStepper();
+            nextStage();
         }
     }
 });
 
+var nextStage = function()   {
+    $('.button-box').append('<button class="nextStage">Continue On!</button>');
+    wins += 1;
+    stageStepper();
+};
+
 var stageStepper = function()   {
-    $('.nextStage').click((event) => {
-        event.preventDefault;
-        game = new Battle(new Character(10), new Enemy(10));
+    $('.nextStage').click(() => {
+        game = new Battle(new Character(wins * 10), new Enemy(wins * 10));
         startingStats();
         $('.nextStage').remove();
     });
